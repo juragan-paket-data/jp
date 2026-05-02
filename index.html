@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juragan Paket Data</title>
+  <meta name="description" content="Juragan Paket Data - Website penjualan paket data modern, cepat, dan responsif." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --bg: #f8fbff;
+      --surface: #ffffff;
+      --surface-soft: #f1f7ff;
+      --text: #07203c;
+      --muted: #52657a;
+      --primary: #1d4ed8;
+      --primary-soft: #dbeafe;
+      --accent: #16a34a;
+      --border: #e2e8f0;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 26%),
+                  radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.12), transparent 20%),
+                  var(--bg);
+      color: var(--text);
+    }
+    .page-wrap {
+      position: relative;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(29, 78, 216, .12), rgba(16, 185, 129, .14));
+      color: var(--primary);
+      font-size: 1.35rem;
+      box-shadow: 0 14px 40px rgba(29, 78, 216, 0.12);
+    }
+    .brand-text h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      letter-spacing: -0.03em;
+    }
+    .brand-text p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: none;
+      font-weight: 700;
+      background: linear-gradient(135deg, #10b981, #0f766e);
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: 0 16px 30px rgba(16, 185, 129, .24);
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); }
+    .hero { display: grid; gap: 18px; padding: 20px 0 32px; }
+    .hero h2 {
+      margin: 0;
+      font-size: clamp(2.35rem, 4vw, 3.2rem);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin-top: 14px;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid rgba(15, 23, 42, .08);
+      border-radius: 24px;
+      min-height: 170px;
+      padding: 26px 20px;
+      display: grid;
+      place-items: center;
+      justify-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      box-shadow: 0 18px 45px rgba(15,23,42,.06);
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(29, 78, 216, .2);
+      box-shadow: 0 26px 70px rgba(15,23,42,.12);
+    }
+    .service-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+    }
+    .service-title {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: center;
+      color: var(--text);
+    }
+    #detailSection { margin-top: 40px; display: none; gap: 28px; }
+    #detailSection.active { display: grid; }
+    .detail-card {
+      background: var(--surface);
+      border-radius: 28px;
+      border: 1px solid rgba(15, 23, 42, .08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 28px 28px 24px;
+    }
+    .detail-label {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .detail-label-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+    }
+    .detail-label-title {
+      margin: 0;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+    .btn-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 8px 12px;
+    }
+    .detail-body { padding: 0 28px 28px; }
+    .package-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 22px;
+    }
+    .package-table th,
+    .package-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(15,23,42,.08);
+    }
+    .package-table th {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .package-table tbody tr:hover { background: rgba(59,130,246,.06); }
+    .package-name { font-weight: 600; color: var(--text); }
+    .package-price { color: var(--primary); font-weight: 700; }
+    
+    /* Styles for Area Information */
+    #areaInfo {
+      margin-top: 20px;
+      border: 1px solid var(--primary-soft);
+      border-radius: 16px;
+      background: var(--surface-soft);
+      padding: 16px;
+      display: none;
+    }
+    .area-info-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .areas-list {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+    .areas-list li { margin-bottom: 4px; }
+
+    .order-card {
+      background: var(--surface-soft);
+      border-radius: 24px;
+      border: 1px solid rgba(29,78,216,.12);
+      padding: 26px;
+    }
+    .order-card h3 { margin: 0 0 18px; font-size: 1.2rem; }
+    .form-field { margin-bottom: 18px; }
+    .form-field label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .form-field input,
+    .form-field select {
+      width: 100%;
+      padding: 16px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .form-field input:focus,
+    .form-field select:focus {
+      outline: none;
+      border-color: rgba(29,78,216,.4);
+      box-shadow: 0 0 0 4px rgba(59,130,246,.1);
+    }
+    .order-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 24px;
+    }
+    .btn-order {
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), #22c55e);
+      color: white;
+      padding: 16px 24px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 18px 35px rgba(29,78,216,.18);
+      transition: transform .2s ease;
+    }
+    .btn-order:hover { transform: translateY(-2px); }
+    .btn-stock {
+      border-radius: 16px;
+      border: 1px solid rgba(29,78,216,.15);
+      background: white;
+      color: var(--primary);
+      padding: 16px 22px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn-stock:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(15,23,42,.12);
+    }
+    .float-whatsapp {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 62px;
+      height: 62px;
+      background: #22c55e;
+      color: white;
+      border-radius: 50%;
+      box-shadow: 0 22px 45px rgba(34,197,94,.28);
+      text-decoration: none;
+      z-index: 100;
+    }
+    .float-whatsapp:hover { transform: translateY(-3px); }
+    .footer { margin-top: 40px; padding: 32px 0 20px; background: rgba(255,255,255,.85); border-top: 1px solid rgba(15,23,42,.08); }
+    .footer .footer-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .footer h4 { margin: 0 0 14px; font-size: 1rem; color: var(--text); }
+    .footer p, .footer a { margin: 0 0 10px; color: var(--muted); font-size: .95rem; text-decoration: none; }
+    .footer-bottom { margin-top: 22px; color: var(--muted); font-size: .9rem; text-align: center; }
+    @media (max-width: 900px) { .detail-header, .footer .footer-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) {
+      .page-wrap { padding: 20px 16px 100px; }
+      header { flex-direction: column; align-items: flex-start; }
+      .btn-whatsapp { width: 100%; justify-content: center; }
+      .services { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+      .detail-body { padding: 0 20px 24px; }
+      .detail-header, .order-card { padding: 22px; }
+      .order-footer { flex-direction: column; align-items: stretch; }
+      .btn-order, .btn-stock { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <header>
+      <div class="brand">
+        <div class="brand-text">
+          <h1>Juragan Paket Data</h1>
+          <p>terpercaya, proses cepat, harga terjangkau</p>
+        </div>
+      </div>
+      <a href="https://wa.me/6287786803835" target="_blank" class="btn-whatsapp">Hubungi Admin</a>
+    </header>
+
+    <div id="landingContent">
+      <section class="hero">
+      </section>
+
+      <section class="services" aria-label="Layanan utama">
+        <button class="service-card" type="button" onclick="selectService('paket-akrab-xla')">
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <p class="service-title">AKRAB XLA</p>
+        </button>
+        <button class="service-card" type="button" onclick="selectService('akrab-xda')">
+          <div class="service-icon"><i class="fas fa-users"></i></div>
+          <p class="service-title">AKRAB XDA</p>
+        </button>
+        <button class="service-card" type="button" onclick="selectService('circle-xclp')">
+          <div class="service-icon"><i class="fas fa-globe"></i></div>
+          <p class="service-title">CIRCLE XCLP</p>
+        </button>
+        <button class="service-card" type="button" onclick="selectService('masa-aktif')">
+          <div class="service-icon"><i class="fas fa-hourglass-half"></i></div>
+          <p class="service-title">MASA AKTIF</p>
+        </button>
+      </section>
+    </div>
+
+    <section id="detailSection">
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="detail-label">
+            <div class="detail-label-icon" id="serviceIcon"><i class="fas fa-bolt"></i></div>
+            <div>
+              <p class="detail-label-title" id="serviceName">PAKET AKRAB XLA</p>
+              <p id="serviceTag" style="margin: 6px 0 0; color: var(--muted); font-size: 0.95rem;">Pilih paket sesuai kebutuhan anda dan jangan lupa cek stok terlebih dahulu</p>
+            </div>
+          </div>
+          <button class="btn-close" type="button" onclick="clearDetail()">Kembali</button>
+        </div>
+        <div class="detail-body">
+          <div class="order-card">
+            <h3>Order Sekarang</h3>
+            <div class="form-field">
+              <label for="phoneInput">Nomor Tujuan</label>
+              <input id="phoneInput" type="text" placeholder="Contoh: 087712345678" maxlength="13" />
+            </div>
+            <div class="form-field">
+              <label for="packageSelect">Pilih Paket</label>
+              <select id="packageSelect" onchange="showAreaDetails()">
+                <option value="">Pilih paket</option>
+              </select>
+              
+              <!-- Info Detail Area -->
+              <div id="areaInfo">
+                <div class="area-info-title">
+                  <i class="fas fa-map-marked-alt"></i> Detail Kuota Per Area:
+                </div>
+                <ul id="areaList" class="areas-list"></ul>
+              </div>
+            </div>
+            <div class="order-footer">
+              <a id="stockUrl" class="btn-stock" target="_blank"><i class="fas fa-search"></i> Cek Stok Manual</a>
+              <a id="areaUrl" class="btn-stock" target="_blank" style="display: none;"></a>
+              <button type="button" class="btn-order" onclick="orderNow()"><i class="fas fa-paper-plane"></i> Order Sekarang</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <a class="float-whatsapp" href="https://wa.me/6287786803835" target="_blank" aria-label="Hubungi admin WhatsApp"></a>
+
+  <footer class="footer">
+    <div class="page-wrap">
+      <div class="footer-bottom">&copy; 2026 Juragan Paket Data. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    const whatsappAdmin = '6287786803835';
+    const serviceData = {
+      'paket-akrab-xla': {
+        name: 'AKRAB XLA',
+        icon: 'fas fa-mobile-alt',
+        stockLink: 'https://stokakrab.vercel.app/',
+        plans: [
+          { title: '(XLA14) SuperMini', price: 'Rp48.000', areas: ['AREA 1 = 13 - 15 GB', 'AREA 2 = 15 - 17 GB', 'AREA 3 = 20 - 22 GB', 'AREA 4 = 30 - 32 GB'] },
+          { title: '(XLA32) Mini', price: 'Rp61.000', areas: ['AREA 1 : 31.75 GB - 33.75 GB', 'AREA 2 : 33.75 - 35.75 GB', 'AREA 3 : 38.75 - 40.75 GB', 'AREA 4 : 48.75 - 50.75 GB'] },
+          { title: '(XLA39) Big', price: 'Rp65.000', areas: ['AREA 1 : 38 GB - 40 GB', 'AREA 2 : 40 GB - 42 GB', 'AREA 3 : 45 GB - 47 GB', 'AREA 4 : 55 GB - 57 GB'] },
+          { title: '(XLA51) Jumbo V2', price: 'Rp75.000', areas: ['AREA 1 = 50.5 - 52.5 GB', 'AREA 2 = 52.5 - 54.5 GB', 'AREA 3 = 57.5 - 59.5 GB', 'AREA 4 = 67.5 - 69.5 GB'] },
+          { title: '(XLA65) JUMBO', price: 'Rp102.000', areas: ['AREA 1 : 88 GB - 90 GB', 'AREA 2 : 90 GB - 92 GB', 'AREA 3 : 95 GB - 97 GB', 'AREA 4 : 105 GB - 107 GB'] },
+          { title: '(XLA89) MegaBig', price: 'Rp100.000', areas: ['Area 1 = 65 GB', 'Area 2 = 70 GB', 'Area 3 = 83 GB', 'Area 4 = 123 GB'] }
+        ]
+      },
+      'akrab-xda': {
+        name: 'AKRAB XDA',
+        icon: 'fas fa-users',
+        stockLink: 'https://juraganxl.my.id/',
+        plans: [
+          { title: 'XDA13', price: 'Rp49.500', areas: ['Area 1: 13GB', 'Area 2: 15GB', 'Area 3: 20GB', 'Area 4: 30GB'] },
+          { title: 'XDA19', price: 'Rp52.500', areas: ['Area 1: 19GB', 'Area 2: 21GB', 'Area 3: 26GB', 'Area 4: 36GB'] },
+          { title: 'XDA25', price: 'Rp57.500', areas: ['Area 1: 25GB', 'Area 2: 27GB', 'Area 3: 32GB', 'Area 4: 42GB'] },
+          { title: 'XDA31', price: 'Rp62.500', areas: ['Area 1: 31GB', 'Area 2: 33GB', 'Area 3: 38GB', 'Area 4: 48GB'] },
+          { title: 'XDA38', price: 'Rp67.500', areas: ['Area 1: 38GB', 'Area 2: 40GB', 'Area 3: 45GB', 'Area 4: 55GB'] },
+          { title: 'XDA47', price: 'Rp72.500', areas: ['Area 1: 47GB', 'Area 2: 49GB', 'Area 3: 54GB', 'Area 4: 64GB'] },
+          { title: 'XDA55', price: 'Rp77.500', areas: ['Area 1: 55GB', 'Area 2: 57GB', 'Area 3: 61GB', 'Area 4: 71GB'] },
+          { title: 'XDA63', price: 'Rp88.000', areas: ['Area 1: 63GB', 'Area 2: 65GB', 'Area 3: 70GB', 'Area 4: 80GB'] },
+          { title: 'XDA76', price: 'Rp96.000', areas: ['Area 1: 76GB', 'Area 2: 78GB', 'Area 3: 83GB', 'Area 4: 93GB'] },
+          { title: 'XDA88', price: 'Rp104.000', areas: ['Area 1: 88GB', 'Area 2: 90GB', 'Area 3: 95GB', 'Area 4: 105GB'] }
+        ]
+      },
+      'circle-xclp': {
+        name: 'CIRCLE XCLP',
+        icon: 'fas fa-globe',
+        stockLink: 'https://juraganxl.my.id/',
+        plans: [
+          { title: 'XCLP5 CIRCLE 5–9GB', price: 'Rp20.000', areas: [] },
+          { title: 'XCLP10 CIRCLE 10–14GB', price: 'Rp25.500', areas: [] },
+          { title: 'XCLP15 CIRCLE 15–19GB', price: 'Rp30.500', areas: [] },
+          { title: 'XCLP20 CIRCLE 20–24GB', price: 'Rp35.500', areas: [] },
+          { title: 'XCLP25 CIRCLE 25–29GB', price: 'Rp40.500', areas: [] },
+          { title: 'XCLP30 CIRCLE 30–34GB', price: 'Rp45.500', areas: [] },
+          { title: 'XCLP35 CIRCLE 35–39GB', price: 'Rp50.500', areas: [] },
+          { title: 'XCLP40 CIRCLE 40–44GB', price: 'Rp55.500', areas: [] },
+          { title: 'XCLP45 CIRCLE 45–49GB', price: 'Rp60.500', areas: [] },
+          { title: 'XCLP50 CIRCLE 50–54GB', price: 'Rp65.500', areas: [] },
+          { title: 'XCLP55 CIRCLE 55–59GB', price: 'Rp71.500', areas: [] },
+          { title: 'XCLP60 CIRCLE 60–64GB', price: 'Rp76.500', areas: [] },
+          { title: 'XCLP65 CIRCLE 65–69GB', price: 'Rp81.500', areas: [] },
+          { title: 'XCLP70 CIRCLE 70–74GB', price: 'Rp86.500', areas: [] },
+          { title: 'XCLP75 CIRCLE 75–79GB', price: 'Rp92.500', areas: [] },
+          { title: 'XCLP80 CIRCLE 80–84GB', price: 'Rp97.500', areas: [] },
+          { title: 'XCLP85 CIRCLE 85–89GB', price: 'Rp102.500', areas: [] },
+          { title: 'XCLP90 CIRCLE 90–94GB', price: 'Rp107.500', areas: [] },
+          { title: 'XCLP95 CIRCLE 95–99GB', price: 'Rp112.500', areas: [] },
+          { title: 'XCLP100 CIRCLE 100–104GB', price: 'Rp117.500', areas: [] },
+          { title: 'XCLP105 CIRCLE 105–109GB', price: 'Rp123.000', areas: [] },
+          { title: 'XCLP110 CIRCLE 110–114GB', price: 'Rp128.000', areas: [] },
+          { title: 'XCLP115 CIRCLE 115–119GB', price: 'Rp133.000', areas: [] },
+          { title: 'XCLP120 CIRCLE 120–124GB', price: 'Rp138.000', areas: [] },
+          { title: 'XCLP125 CIRCLE 125–129GB', price: 'Rp143.000', areas: [] }
+        ]
+      },
+      'masa-aktif': {
+        name: 'MASA AKTIF',
+        icon: 'fas fa-hourglass-half',
+        stockLink: '',
+        plans: [
+          { title: 'XL-AXIS NON AKUMULASI', price: 'Rp8.000', areas: [] }
+        ]
+      }
+    };
+
+    const detailSection = document.getElementById('detailSection');
+    const landingContent = document.getElementById('landingContent');
+    const packageSelect = document.getElementById('packageSelect');
+    const stockUrl = document.getElementById('stockUrl');
+    const areaUrl = document.getElementById('areaUrl');
+    const phoneInput = document.getElementById('phoneInput');
+    const serviceName = document.getElementById('serviceName');
+    const serviceIcon = document.getElementById('serviceIcon');
+    const areaInfo = document.getElementById('areaInfo');
+    const areaList = document.getElementById('areaList');
+
+    let currentService = null;
+
+    function selectService(key) {
+      const service = serviceData[key];
+      if (!service) return;
+      
+      landingContent.style.display = 'none';
+      detailSection.classList.add('active');
+      serviceName.textContent = service.name;
+      serviceIcon.innerHTML = `<i class="${service.icon}"></i>`;
+      stockUrl.href = service.stockLink;
+      
+      // Reset Area Info
+      areaInfo.style.display = 'none';
+      areaList.innerHTML = '';
+
+      if (key === 'masa-aktif') {
+        stockUrl.style.display = 'none';
+      } else {
+        stockUrl.style.display = 'inline-flex';
+      }
+
+      if (key === 'paket-akrab-xla' || key === 'akrab-xda') {
+        areaUrl.href = 'https://cekareaxl.vercel.app/';
+        areaUrl.innerHTML = '<i class="fas fa-map-marker-alt"></i> Cek Area';
+        areaUrl.style.display = 'inline-flex';
+      } else if (key === 'circle-xclp') {
+        areaUrl.href = 'https://juraganxl.my.id/circle';
+        areaUrl.innerHTML = '<i class="fas fa-users"></i> Cek Bergabung Circle';
+        areaUrl.style.display = 'inline-flex';
+      } else {
+        areaUrl.style.display = 'none';
+      }
+
+      packageSelect.innerHTML = '<option value="">Pilih paket</option>';
+      service.plans.forEach((plan, index) => {
+        const option = document.createElement('option');
+        option.value = index; // Gunakan index untuk mencari data areas nanti
+        option.textContent = `${plan.title} — ${plan.price}`;
+        packageSelect.appendChild(option);
+      });
+
+      phoneInput.value = localStorage.getItem('lastPhone') || '';
+      currentService = key;
+      window.location.hash = key;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showAreaDetails() {
+      const selectedIndex = packageSelect.value;
+      areaList.innerHTML = '';
+      
+      if (selectedIndex === "" || !currentService) {
+        areaInfo.style.display = 'none';
+        return;
+      }
+
+      const selectedPlan = serviceData[currentService].plans[selectedIndex];
+      
+      if (selectedPlan && selectedPlan.areas && selectedPlan.areas.length > 0) {
+        selectedPlan.areas.forEach(area => {
+          const li = document.createElement('li');
+          li.textContent = area;
+          areaList.appendChild(li);
+        });
+        areaInfo.style.display = 'block';
+      } else {
+        areaInfo.style.display = 'none';
+      }
+    }
+
+    function clearDetail() {
+      detailSection.classList.remove('active');
+      landingContent.style.display = 'block';
+      packageSelect.innerHTML = '<option value="">Pilih paket</option>';
+      areaInfo.style.display = 'none';
+      phoneInput.value = '';
+      areaUrl.style.display = 'none';
+      stockUrl.style.display = 'inline-flex';
+      currentService = null;
+      window.location.hash = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function orderNow() {
+      const selectedIndex = packageSelect.value;
+      const phone = phoneInput.value.trim();
+      
+      if (!currentService || phone === "" || selectedIndex === "" || !/^\d{10,13}$/.test(phone)) {
+        alert('Masukkan nomor tujuan dan pilih paket yang valid.');
+        return;
+      }
+
+      localStorage.setItem('lastPhone', phone);
+      const selectedPlan = serviceData[currentService].plans[selectedIndex];
+      const serviceLabel = serviceData[currentService].name;
+      
+      const message = encodeURIComponent(`Halo Juragan Paket Data, saya ingin order:\n\nLayanan: ${serviceLabel}\nNomor Tujuan: ${phone}\nPaket Dipilih: ${selectedPlan.title} — ${selectedPlan.price}\n\nMohon diproses. Saya akan membayar via QRIS dan akan mengirim bukti pembayaran setelah transfer.`);
+      window.open(`https://wa.me/${whatsappAdmin}?text=${message}`, '_blank');
+    }
+
+    if (window.location.hash) {
+      const target = window.location.hash.replace('#', '');
+      if (serviceData[target]) {
+        selectService(target);
+      }
+    }
+  </script>
+</body>
+</html>
