@@ -37,7 +37,7 @@
       position: relative;
       max-width: 1180px;
       margin: 0 auto;
-      padding: 24px 20px 80px;
+      padding: 24px 20px 40px;
     }
     header {
       display: flex;
@@ -77,7 +77,6 @@
       box-shadow: 0 16px 30px rgba(16, 185, 129, .24);
     }
     .btn-whatsapp:hover { transform: translateY(-2px); }
-    .hero { display: grid; gap: 18px; padding: 20px 0 32px; }
     .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -247,19 +246,82 @@
       gap: 10px;
       transition: transform .2s ease, box-shadow .2s ease;
     }
-    .footer { margin-top: 40px; padding: 32px 0 20px; background: rgba(255,255,255,.85); border-top: 1px solid rgba(15,23,42,.08); }
-    .footer-bottom { margin-top: 22px; color: var(--muted); font-size: .9rem; text-align: center; }
+
+    /* Footer Section */
+    .footer { 
+      margin-top: 60px; 
+      padding: 40px 0 20px; 
+      background: var(--surface); 
+      border-top: 1px solid var(--border); 
+      box-shadow: 0 -10px 40px rgba(15, 23, 42, 0.05);
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .footer-box h4 {
+      margin: 0 0 16px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+    .footer-box p {
+      margin: 8px 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-box i {
+      color: var(--primary);
+      width: 20px;
+      text-align: center;
+    }
+    .payment-section {
+      margin-top: 15px;
+    }
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .payment-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-soft);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .footer-bottom { 
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      color: var(--muted); 
+      font-size: .85rem; 
+      text-align: center; 
+    }
+
     @media (max-width: 720px) {
-      .page-wrap { padding: 20px 16px 100px; }
+      .page-wrap { padding: 20px 16px 40px; }
       header { flex-direction: column; align-items: flex-start; }
       .btn-whatsapp { width: 100%; justify-content: center; }
       .order-footer { flex-direction: column; align-items: stretch; }
       .btn-order, .btn-stock { width: 100%; }
+      .footer-content { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="page-wrap">
+    <!-- Header -->
     <header>
       <div class="brand">
         <div class="brand-text">
@@ -267,41 +329,47 @@
           <p>terpercaya, proses cepat, harga terjangkau</p>
         </div>
       </div>
-      <a href="https://wa.me/6287786803835" target="_blank" class="btn-whatsapp">Hubungi Admin</a>
+      <a href="https://wa.me/6287874202063" target="_blank" class="btn-whatsapp">Hubungi Admin</a>
     </header>
 
+    <!-- Services Section -->
     <div id="landingContent">
-      <section class="services" aria-label="Layanan utama">
-        <button class="service-card" type="button" onclick="selectService('paket-akrab-xla')">
+      <section class="services">
+        <button class="service-card" onclick="selectService('paket-akrab-xla')">
           <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
           <p class="service-title">AKRAB XLA</p>
         </button>
-        <button class="service-card" type="button" onclick="selectService('akrab-xda')">
+        <button class="service-card" onclick="selectService('akrab-xda')">
           <div class="service-icon"><i class="fas fa-users"></i></div>
           <p class="service-title">AKRAB XDA</p>
         </button>
-        <button class="service-card" type="button" onclick="selectService('circle-xclp')">
+        <button class="service-card" onclick="selectService('circle-xclp')">
           <div class="service-icon"><i class="fas fa-globe"></i></div>
           <p class="service-title">CIRCLE XCLP</p>
         </button>
-        <button class="service-card" type="button" onclick="selectService('masa-aktif')">
+        <button class="service-card" onclick="selectService('flexmax')">
+          <div class="service-icon"><i class="fas fa-bolt"></i></div>
+          <p class="service-title">FLEXMAX</p>
+        </button>
+        <button class="service-card" onclick="selectService('masa-aktif')">
           <div class="service-icon"><i class="fas fa-hourglass-half"></i></div>
           <p class="service-title">MASA AKTIF</p>
         </button>
       </section>
     </div>
 
+    <!-- Detail Order Section -->
     <section id="detailSection">
       <div class="detail-card">
         <div class="detail-header">
           <div class="detail-label">
             <div class="detail-label-icon" id="serviceIcon"><i class="fas fa-bolt"></i></div>
             <div>
-              <p class="detail-label-title" id="serviceName">PAKET AKRAB XLA</p>
-              <p id="serviceTag" style="margin: 6px 0 0; color: var(--muted); font-size: 0.95rem;">Pilih paket sesuai kebutuhan anda dan jangan lupa cek stok terlebih dahulu</p>
+              <p class="detail-label-title" id="serviceName">Layanan</p>
+              <p id="serviceTag" style="margin: 6px 0 0; color: var(--muted); font-size: 0.95rem;">Pilih paket sesuai kebutuhan anda</p>
             </div>
           </div>
-          <button class="btn-close" type="button" onclick="clearDetail()">Kembali</button>
+          <button class="btn-close" onclick="clearDetail()">Kembali</button>
         </div>
         <div class="detail-body">
           <div class="order-card">
@@ -331,25 +399,60 @@
     </section>
   </div>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="page-wrap">
-      <div class="footer-bottom">&copy; 2026 Juragan Paket Data. All Rights Reserved.</div>
+      <div class="footer-content">
+        <!-- Bagian Kontak & Pembayaran (Digabung agar Pembayaran di bawah Kontak) -->
+        <div class="footer-box">
+          <h4>Kontak Kami</h4>
+          <p><i class="fab fa-whatsapp"></i> 087786803835 (Pemilik)</p>
+          <p><i class="fab fa-whatsapp"></i> 087874202063 (Admin)</p>
+          
+          <div class="payment-section">
+            <h4>Pembayaran</h4>
+            <div class="payment-grid">
+              <div class="payment-item"><i class="fas fa-wallet"></i> DANA</div>
+              <div class="payment-item"><i class="fas fa-university"></i> SEABANK</div>
+              <div class="payment-item"><i class="fas fa-university"></i> BNI</div>
+              <div class="payment-item"><i class="fas fa-qrcode"></i> QRIS</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Media Sosial -->
+        <div class="footer-box">
+          <h4>Ikuti Kami</h4>
+          <p><i class="fab fa-instagram"></i> IG Juragan_Paket_Data</p>
+          <p><i class="fab fa-telegram-plane"></i> Telegram @Juragan_paket_data</p>
+        </div>
+
+        <!-- Jam Operasional -->
+        <div class="footer-box">
+          <h4>Jam Operasional</h4>
+          <p><i class="far fa-clock"></i> 07.00 (Pagi) - 01.00 (Malam)</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        &copy; 2026 Juragan Paket Data. All Rights Reserved.
+      </div>
     </div>
   </footer>
 
   <script>
-    const whatsappAdmin = '6287786803835';
+    const whatsappAdmin = '6287874202063';
     const qrisLink = 'https://drive.google.com/drive/folders/1IajnfBTmGdOCSVgr1_ZUjyXiLM1kY5V4?usp=drive_link';
     const serviceData = {
       'paket-akrab-xla': {
         name: 'AKRAB XLA', icon: 'fas fa-mobile-alt', stockLink: 'https://stokakrab.vercel.app/',
         plans: [
-          { title: '(XLA14) SuperMini', price: 'Rp48.000', areas: ['AREA 1 = 13 - 15 GB', 'AREA 2 = 15 - 17 GB', 'AREA 3 = 20 - 22 GB', 'AREA 4 = 30 - 32 GB'] },
-          { title: '(XLA32) Mini', price: 'Rp61.000', areas: ['AREA 1 : 31.75 GB - 33.75 GB', 'AREA 2 : 33.75 - 35.75 GB', 'AREA 3 : 38.75 - 40.75 GB', 'AREA 4 : 48.75 - 50.75 GB'] },
-          { title: '(XLA39) Big', price: 'Rp65.000', areas: ['AREA 1 : 38 GB - 40 GB', 'AREA 2 : 40 GB - 42 GB', 'AREA 3 : 45 GB - 47 GB', 'AREA 4 : 55 GB - 57 GB'] },
-          { title: '(XLA51) Jumbo V2', price: 'Rp75.000', areas: ['AREA 1 = 50.5 - 52.5 GB', 'AREA 2 = 52.5 - 54.5 GB', 'AREA 3 = 57.5 - 59.5 GB', 'AREA 4 = 67.5 - 69.5 GB'] },
-          { title: '(XLA65) JUMBO', price: 'Rp102.000', areas: ['AREA 1 : 88 GB - 90 GB', 'AREA 2 : 90 GB - 92 GB', 'AREA 3 : 95 GB - 97 GB', 'AREA 4 : 105 GB - 107 GB'] },
-          { title: '(XLA89) MegaBig', price: 'Rp100.000', areas: ['Area 1 = 65 GB', 'Area 2 = 70 GB', 'Area 3 = 83 GB', 'Area 4 = 123 GB'] }
+          { title: 'SuperMini', price: 'Rp48.000', areas: ['AREA 1 = 13 - 15 GB', 'AREA 2 = 15 - 17 GB', 'AREA 3 = 20 - 22 GB', 'AREA 4 = 30 - 32 GB'] },
+          { title: 'Mini', price: 'Rp61.000', areas: ['AREA 1 : 31.75 GB - 33.75 GB', 'AREA 2 : 33.75 - 35.75 GB', 'AREA 3 : 38.75 - 40.75 GB', 'AREA 4 : 48.75 - 50.75 GB'] },
+          { title: 'Big', price: 'Rp65.000', areas: ['AREA 1 : 38 GB - 40 GB', 'AREA 2 : 40 GB - 42 GB', 'AREA 3 : 45 GB - 47 GB', 'AREA 4 : 55 GB - 57 GB'] },
+          { title: 'Jumbo V2', price: 'Rp75.000', areas: ['AREA 1 = 50.5 - 52.5 GB', 'AREA 2 = 52.5 - 54.5 GB', 'AREA 3 = 57.5 - 59.5 GB', 'AREA 4 = 67.5 - 69.5 GB'] },
+          { title: 'JUMBO', price: 'Rp102.000', areas: ['AREA 1 : 88 GB - 90 GB', 'AREA 2 : 90 GB - 92 GB', 'AREA 3 : 95 GB - 97 GB', 'AREA 4 : 105 GB - 107 GB'] },
+          { title: 'MegaBig', price: 'Rp100.000', areas: ['Area 1 = 65 GB', 'Area 2 = 70 GB', 'Area 3 = 83 GB', 'Area 4 = 123 GB'] }
         ]
       },
       'akrab-xda': {
@@ -370,36 +473,53 @@
       'circle-xclp': {
         name: 'CIRCLE XCLP', icon: 'fas fa-globe', stockLink: 'https://juraganxl.my.id/',
         plans: [
-          { title: 'XCLP5 CIRCLE 5–9GB', price: 'Rp20.000', areas: [] },
-          { title: 'XCLP10 CIRCLE 10–14GB', price: 'Rp25.500', areas: [] },
-          { title: 'XCLP15 CIRCLE 15–19GB', price: 'Rp30.500', areas: [] },
-          { title: 'XCLP20 CIRCLE 20–24GB', price: 'Rp35.500', areas: [] },
-          { title: 'XCLP25 CIRCLE 25–29GB', price: 'Rp40.500', areas: [] },
-          { title: 'XCLP30 CIRCLE 30–34GB', price: 'Rp45.500', areas: [] },
-          { title: 'XCLP35 CIRCLE 35–39GB', price: 'Rp50.500', areas: [] },
-          { title: 'XCLP40 CIRCLE 40–44GB', price: 'Rp55.500', areas: [] },
-          { title: 'XCLP45 CIRCLE 45–49GB', price: 'Rp60.500', areas: [] },
-          { title: 'XCLP50 CIRCLE 50–54GB', price: 'Rp65.500', areas: [] },
-          { title: 'XCLP55 CIRCLE 55–59GB', price: 'Rp71.500', areas: [] },
-          { title: 'XCLP60 CIRCLE 60–64GB', price: 'Rp76.500', areas: [] },
-          { title: 'XCLP65 CIRCLE 65–69GB', price: 'Rp81.500', areas: [] },
-          { title: 'XCLP70 CIRCLE 70–74GB', price: 'Rp86.500', areas: [] },
-          { title: 'XCLP75 CIRCLE 75–79GB', price: 'Rp92.500', areas: [] },
-          { title: 'XCLP80 CIRCLE 80–84GB', price: 'Rp97.500', areas: [] },
-          { title: 'XCLP85 CIRCLE 85–89GB', price: 'Rp102.500', areas: [] },
-          { title: 'XCLP90 CIRCLE 90–94GB', price: 'Rp107.500', areas: [] },
-          { title: 'XCLP95 CIRCLE 95–99GB', price: 'Rp112.500', areas: [] },
-          { title: 'XCLP100 CIRCLE 100–104GB', price: 'Rp117.500', areas: [] },
-          { title: 'XCLP105 CIRCLE 105–109GB', price: 'Rp123.000', areas: [] },
-          { title: 'XCLP110 CIRCLE 110–114GB', price: 'Rp128.000', areas: [] },
-          { title: 'XCLP115 CIRCLE 115–119GB', price: 'Rp133.000', areas: [] },
-          { title: 'XCLP120 CIRCLE 120–124GB', price: 'Rp138.000', areas: [] },
-          { title: 'XCLP125 CIRCLE 125–129GB', price: 'Rp143.000', areas: [] }
+          { title: 'XCLP5 5–9GB', price: 'Rp20.000', areas: [] },
+          { title: 'XCLP10 10–14GB', price: 'Rp25.500', areas: [] },
+          { title: 'XCLP15 15–19GB', price: 'Rp30.500', areas: [] },
+          { title: 'XCLP20 20–24GB', price: 'Rp35.500', areas: [] },
+          { title: 'XCLP25 25–29GB', price: 'Rp40.500', areas: [] },
+          { title: 'XCLP30 30–34GB', price: 'Rp45.500', areas: [] },
+          { title: 'XCLP35 35–39GB', price: 'Rp50.500', areas: [] },
+          { title: 'XCLP40 40–44GB', price: 'Rp55.500', areas: [] },
+          { title: 'XCLP45 45–49GB', price: 'Rp60.500', areas: [] },
+          { title: 'XCLP50 50–54GB', price: 'Rp65.500', areas: [] },
+          { title: 'XCLP55 55–59GB', price: 'Rp71.500', areas: [] },
+          { title: 'XCLP60 60–64GB', price: 'Rp76.500', areas: [] },
+          { title: 'XCLP65 65–69GB', price: 'Rp81.500', areas: [] },
+          { title: 'XCLP70 70–74GB', price: 'Rp86.500', areas: [] },
+          { title: 'XCLP75 75–79GB', price: 'Rp92.500', areas: [] },
+          { title: 'XCLP80 80–84GB', price: 'Rp97.500', areas: [] },
+          { title: 'XCLP85 85–89GB', price: 'Rp102.500', areas: [] },
+          { title: 'XCLP90 90–94GB', price: 'Rp107.500', areas: [] },
+          { title: 'XCLP95 95–99GB', price: 'Rp112.500', areas: [] },
+          { title: 'XCLP100 100–104GB', price: 'Rp117.500', areas: [] },
+          { title: 'XCLP105 105–109GB', price: 'Rp123.000', areas: [] },
+          { title: 'XCLP110 110–114GB', price: 'Rp128.000', areas: [] },
+          { title: 'XCLP115 115–119GB', price: 'Rp133.000', areas: [] },
+          { title: 'XCLP120 120–124GB', price: 'Rp138.000', areas: [] },
+          { title: 'XCLP125 125–129GB', price: 'Rp143.000', areas: [] }
+        ]
+      },
+      'flexmax': {
+        name: 'FLEXMAX', icon: 'fas fa-bolt', stockLink: 'https://juraganxl.my.id/',
+        plans: [
+          { title: 'FM7 - 7GB 28HARI', price: 'Rp38.500', areas: [] },
+          { title: 'FM10 - 10GB 28HARI', price: 'Rp43.500', areas: [] },
+          { title: 'FM16 - 16GB 28HARI', price: 'Rp52.000', areas: [] },
+          { title: 'FM23 - 23GB 28HARI', price: 'Rp61.500', areas: [] },
+          { title: 'FM31 - 31GB 28HARI', price: 'Rp71.000', areas: [] },
+          { title: 'FM40 - 40GB 28HARI', price: 'Rp80.500', areas: [] },
+          { title: 'FM50 - 50GB 28HARI', price: 'Rp91.500', areas: [] },
+          { title: 'FM65 - 65GB 28HARI', price: 'Rp101.000', areas: [] },
+          { title: 'FM100 - 100GB 28HARI', price: 'Rp126.000', areas: [] },
+          { title: 'FM150 - 150GB 28HARI', price: 'Rp152.000', areas: [] },
+          { title: 'FM300 - 300GB 28HARI', price: 'Rp204.000', areas: [] },
+          { title: 'FM600 - 600GB 28HARI', price: 'Rp304.000', areas: [] }
         ]
       },
       'masa-aktif': {
         name: 'MASA AKTIF', icon: 'fas fa-hourglass-half', stockLink: '',
-        plans: [{ title: 'XL-AXIS NON AKUMULASI', price: 'Rp8.000', areas: [] }]
+        plans: [{ title: 'XL-AXIS (NON AKUMULASI)', price: 'Rp8.000', areas: [] }]
       }
     };
 
@@ -435,10 +555,7 @@
       if (!currentService || phone === "" || selectedIndex === "" || !/^\d{10,13}$/.test(phone)) { alert('Masukkan nomor tujuan dan pilih paket yang valid.'); return; }
       localStorage.setItem('lastPhone', phone);
       const selectedPlan = serviceData[currentService].plans[selectedIndex], serviceLabel = serviceData[currentService].name;
-      
-      // FORMAT PESAN SESUAI PERMINTAAN[cite: 1]
       const message = encodeURIComponent(`Halo Juragan, saya ingin order:\n\nLayanan: ${serviceLabel}\nNomor Tujuan: ${phone}\nPaket Dipilih: ${selectedPlan.title} — ${selectedPlan.price}\n\nSilahkan melakukan pembayaran melalui link QRIS di bawah ini dan kirimkan bukti transaksinya\n\nLink Pembayaran QRIS: ${qrisLink}`);
-      
       window.open(`https://wa.me/${whatsappAdmin}?text=${message}`, '_blank');
     }
 
