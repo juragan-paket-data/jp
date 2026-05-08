@@ -1,26 +1,31 @@
 export default async function handler(req, res) {
-  const api_key = process.env.DEV_API_KEY;
-  // Jika Zeinstore minta ID Member/ID Buyer, pastikan DEV_USERNAME di Vercel sudah diisi ID tersebut
-  const api_id = process.env.DEV_USERNAME; 
+  // Ambil API Key dari Environment Variable Vercel Anda
+  const api_key = process.env.DEV_API_KEY; 
 
   try {
-    const response = await fetch('https://zeinstore.id/api/v1/prepaid/services', {
+    const response = await fetch('https://api.griyaflazz.xyz/service/list', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'x-api-key': api_key // Ini yang paling penting sesuai foto dokumentasi
       },
       body: JSON.stringify({
-        key: api_key,       // Beberapa supplier pakai 'key' bukan 'api_key'
-        sign: api_id,      // Beberapa supplier minta ID di kolom sign
-        action: 'services'
+        status: "active", // Hanya mengambil produk yang aktif
+        limit: "200",
+        page: "1"
       })
     });
 
     const data = await response.json();
     
-    // Kirim hasilnya ke layar untuk kita intip masalahnya
-    res.status(200).json(data);
+    // Griya Flazz mengembalikan data dalam format { success: true, data: [...] }
+    if (data.success) {
+      res.status(200).json(data.data);
+    } else {
+      res.status(400).json({ message: data.message || 'Gagal mengambil data' });
+    }
   } catch (error) {
-    res.status(500).json({ error: "Koneksi ke server Zeinstore terputus" });
+    res.status(500).json({ error: 'Koneksi ke Griya Flazz bermasalah' });
   }
 }
