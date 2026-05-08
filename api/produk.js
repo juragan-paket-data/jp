@@ -1,29 +1,28 @@
-const crypto = require('crypto');
-
 export default async function handler(req, res) {
-  // Mengambil data dari variabel rahasia yang kita setting di Vercel tadi
-  const username = process.env.DEV_USERNAME;
-  const apiKey = process.env.DEV_API_KEY;
+  const api_key = process.env.DEV_API_KEY; // Ambil dari Vercel
   
-  // Membuat Signature keamanan sesuai aturan supplier (Digiflazz)
-  const sign = crypto.createHash('md5').update(username + apiKey + "pricelist").digest('hex');
-
   try {
-    const response = await fetch('https://api.digiflazz.com/v1/price-list', {
+    const response = await fetch('https://zeinstore.id/api/v1/prepaid/services', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
       body: JSON.stringify({
-        cmd: 'prepaid',
-        username: username,
-        sign: sign
+        api_key: api_key,
+        action: 'services' // Perintah untuk mengambil daftar produk
       })
     });
 
     const data = await response.json();
-    
-    // Kirim data produk ke website Anda
-    res.status(200).json(data.data);
+
+    // Zeinstore biasanya mengembalikan data dalam format { status: true, data: [...] }
+    if (data.status) {
+      res.status(200).json(data.data);
+    } else {
+      res.status(400).json({ message: data.message || 'Gagal mengambil data' });
+    }
   } catch (error) {
-    res.status(500).json({ error: 'Gagal mengambil data' });
+    res.status(500).json({ error: 'Koneksi ke Zeinstore gagal' });
   }
 }
